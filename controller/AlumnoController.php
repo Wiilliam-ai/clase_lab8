@@ -45,17 +45,62 @@ class AlumnoController{
     }
 
     public function registrar(){
-        $nombre = $_POST["nombres"];
-        echo $nombre;
+        $alumnoDao = new AlumnoDao();
+        $alumno = new Alumno();
+        if ($_POST) {
+            # code...
+            $apellidos = $_POST["apellidos"];
+            $nombre = $_POST["nombres"];
+            $edad = $_POST["edad"];
+
+            $alumno->setApellido($apellidos);
+            $alumno->setNombre($nombre);
+            $alumno->setEdad($edad);
+
+            $alumnoDao->insert($alumno);
+        }
+        
+        
         require("view/registrar.php");
     }
 
     public function editar(){
+        $alumnoDao = new AlumnoDao();
+        $alumno = new Alumno();
+        $id = "";
+        if (isset($_GET["id"])) {
+            $id = $_GET["id"];
+        }
+
+        $objeto = $alumnoDao->select($id);
+
+        if ($_POST) {
+
+            $idC = $_POST["txtId"];
+            $apellidos = $_POST["apellidos"];
+            $nombre = $_POST["nombres"];
+            $edad = $_POST["edad"];
+
+            $alumno->setId($idC);
+            $alumno->setApellido($apellidos);
+            $alumno->setNombre($nombre);
+            $alumno->setEdad($edad);
+
+            $alumnoDao->update($alumno);
+            header("location: index.php");
+        }
+
         require("view/editar.php");
     }
 
     public function eliminar(){
-        require("view/eliminar.php");
+        $alumnoDao = new AlumnoDao();
+        $id = "";
+        if (isset($_GET["id"])) {
+            $id = $_GET["id"];
+        }
+        $alumnoDao->delete($id);
+        header("location: index.php");
     }
 
 }
