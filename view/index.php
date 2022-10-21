@@ -1,6 +1,6 @@
 
 
-<h1 class="fs-4 text-center">Ejemplo 5: Listado de coches</h1>
+<h1 class="fs-4 text-center">Listado de Alumnos</h1>
 <div style="max-width: 600px;" class="mx-auto">
     <a href="?cmd=registrar" class="btn btn-dark mb-3">Crear</a>
     <table class="table">
